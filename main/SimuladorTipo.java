@@ -1,3 +1,5 @@
+package main;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -14,6 +16,7 @@ import java.util.List;
 public class SimuladorTipo {
 
     private String name;
+    private String simuladorRuta; // Se mantiene el nombre original para el ID del archivo
     private List<Pregunta> listaPreguntas = new ArrayList<>();
 
     // Constructor vacío
@@ -21,8 +24,9 @@ public class SimuladorTipo {
     }
 
     // Constructor con parámetros
-    public SimuladorTipo(String name) {
+    public SimuladorTipo(String name, String simuladorRuta) {
         this.name = name;
+        this.simuladorRuta = simuladorRuta;
     }
 
     // Getters y setters
@@ -32,6 +36,14 @@ public class SimuladorTipo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getsimuladorRuta() {
+        return simuladorRuta;
+    }
+
+    public void setsimuladorRuta(String simuladorRuta) {
+        this.simuladorRuta = simuladorRuta; // Asignamos a simuladorRuta en lugar de name
     }
 
     public List<Pregunta> getListaPreguntas() {

@@ -1,7 +1,12 @@
+package main;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import services.SimuladorService;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,6 +20,8 @@ import javax.swing.JPanel;
 public class Main extends javax.swing.JFrame {
     
     private static final Dimension SIZE = new Dimension(430, 932);
+    private List<SimuladorTipo> listaSimuladores = new ArrayList<>();
+    private SimuladorService simuladorService;
 
     /**
      * Creates new form main
@@ -24,7 +31,8 @@ public class Main extends javax.swing.JFrame {
         GeneratorView p1 = new GeneratorView();
         this.setResizable(false);
         showPanel(p1);
-  
+        this.simuladorService = new SimuladorService();
+        this.simuladorService.cargarSimuladores();
         this.revalidate();
     }
 
@@ -48,11 +56,11 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
