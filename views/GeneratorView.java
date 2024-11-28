@@ -203,13 +203,13 @@ public class GeneratorView extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         add(modalContainer, gridBagConstraints);
 
-        scrollContainer.setAutoscrolls(true);
         scrollContainer.setHorizontalScrollBar(null);
         scrollContainer.setMinimumSize(new java.awt.Dimension(404, 400));
         scrollContainer.setName(""); // NOI18N
 
-        preguntasContainer.setMinimumSize(new java.awt.Dimension(404, 900));
-        preguntasContainer.setPreferredSize(new java.awt.Dimension(404, 900));
+        preguntasContainer.setBackground(new java.awt.Color(10, 38, 72));
+        preguntasContainer.setMinimumSize(new java.awt.Dimension(280, 900));
+        preguntasContainer.setPreferredSize(new java.awt.Dimension(280, 900));
         preguntasContainer.setLayout(new javax.swing.BoxLayout(preguntasContainer, javax.swing.BoxLayout.Y_AXIS));
         scrollContainer.setViewportView(preguntasContainer);
 
@@ -300,7 +300,7 @@ public class GeneratorView extends javax.swing.JPanel {
             debugContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(debugContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         debugContainerLayout.setVerticalGroup(
@@ -378,6 +378,11 @@ public class GeneratorView extends javax.swing.JPanel {
     private void myInitComponents() {
         // Configuración inicial
         desplegableContainer.setMaximumSize(new java.awt.Dimension(400, Integer.MAX_VALUE));
+        scrollContainer.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(5, 0));
+        scrollContainer.getVerticalScrollBar().setBackground(Color.DARK_GRAY);  // Fondo oscuro
+        scrollContainer.getVerticalScrollBar().setUnitIncrement(16);  // Incremento más rápido
+ // Barra vertical fina
+        //scrollContainer.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(0, 5)); // Bar
 
         desplegable.setVisible(false); // Asegúrate de que el modal no sea visible inicialmente
         modalContainer.add(desplegable); // Agrega el modal a su contenedor

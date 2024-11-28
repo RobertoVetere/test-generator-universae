@@ -4,6 +4,8 @@
  */
 package views;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author admin
@@ -28,7 +30,6 @@ public class PreguntaView extends javax.swing.JPanel {
 
         addPregunta = new javax.swing.JPanel();
         label3 = new java.awt.Label();
-        hSpace = new javax.swing.JLabel();
         borrarPreguntaLabel = new javax.swing.JLabel();
         label1 = new java.awt.Label();
         preguntaLabel = new javax.swing.JTextField();
@@ -43,16 +44,13 @@ public class PreguntaView extends javax.swing.JPanel {
         addPregunta.setBackground(new java.awt.Color(10, 38, 72));
         addPregunta.setMinimumSize(new java.awt.Dimension(95, 0));
         addPregunta.setPreferredSize(new java.awt.Dimension(95, 100));
-        addPregunta.setLayout(new javax.swing.BoxLayout(addPregunta, javax.swing.BoxLayout.LINE_AXIS));
+        addPregunta.setLayout(new java.awt.GridLayout());
 
         label3.setForeground(new java.awt.Color(255, 255, 255));
+        label3.setMinimumSize(new java.awt.Dimension(20, 20));
+        label3.setPreferredSize(new java.awt.Dimension(20, 20));
         label3.setText("Pregunta");
         addPregunta.add(label3);
-
-        hSpace.setMaximumSize(new java.awt.Dimension(10, 20));
-        hSpace.setMinimumSize(new java.awt.Dimension(10, 20));
-        hSpace.setPreferredSize(new java.awt.Dimension(10, 20));
-        addPregunta.add(hSpace);
 
         borrarPreguntaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         borrarPreguntaLabel.setMaximumSize(new java.awt.Dimension(15, 15));
@@ -65,7 +63,7 @@ public class PreguntaView extends javax.swing.JPanel {
         label1.setForeground(new java.awt.Color(255, 255, 255));
         label1.setText("Respuesta correcta");
 
-        preguntaLabel.setBackground(new java.awt.Color(117, 113, 113));
+        preguntaLabel.setBackground(new java.awt.Color(124, 127, 143));
         preguntaLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         preguntaLabel.setForeground(new java.awt.Color(255, 255, 255));
         preguntaLabel.setText("  Ejemplo");
@@ -77,7 +75,7 @@ public class PreguntaView extends javax.swing.JPanel {
             }
         });
 
-        correctaLabel.setBackground(new java.awt.Color(117, 113, 113));
+        correctaLabel.setBackground(new java.awt.Color(124, 127, 143));
         correctaLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         correctaLabel.setForeground(new java.awt.Color(255, 255, 255));
         correctaLabel.setText("  Ejemplo correcta");
@@ -93,7 +91,7 @@ public class PreguntaView extends javax.swing.JPanel {
         label2.setForeground(new java.awt.Color(255, 255, 255));
         label2.setText("Respuestas incorrectas");
 
-        incorrectaLabel1.setBackground(new java.awt.Color(117, 113, 113));
+        incorrectaLabel1.setBackground(new java.awt.Color(124, 127, 143));
         incorrectaLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         incorrectaLabel1.setForeground(new java.awt.Color(255, 255, 255));
         incorrectaLabel1.setText("  Ejemplo incorrecta 1");
@@ -105,7 +103,7 @@ public class PreguntaView extends javax.swing.JPanel {
             }
         });
 
-        incorrectaLabel2.setBackground(new java.awt.Color(117, 113, 113));
+        incorrectaLabel2.setBackground(new java.awt.Color(124, 127, 143));
         incorrectaLabel2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         incorrectaLabel2.setForeground(new java.awt.Color(255, 255, 255));
         incorrectaLabel2.setText("  Ejemplo incorrecta 2");
@@ -117,7 +115,7 @@ public class PreguntaView extends javax.swing.JPanel {
             }
         });
 
-        incorrectaLabel3.setBackground(new java.awt.Color(117, 113, 113));
+        incorrectaLabel3.setBackground(new java.awt.Color(124, 127, 143));
         incorrectaLabel3.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         incorrectaLabel3.setForeground(new java.awt.Color(255, 255, 255));
         incorrectaLabel3.setText("  Ejemplo incorrecta 3");
@@ -134,21 +132,21 @@ public class PreguntaView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                     .addComponent(correctaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(preguntaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                    .addComponent(incorrectaLabel1)
+                    .addComponent(incorrectaLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                     .addComponent(incorrectaLabel2)
-                    .addComponent(incorrectaLabel3))
+                    .addComponent(incorrectaLabel3)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(19, Short.MAX_VALUE)
-                    .addComponent(addPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(14, 14, 14)))
+                    .addContainerGap(23, Short.MAX_VALUE)
+                    .addComponent(addPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(241, 241, 241)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +199,6 @@ public class PreguntaView extends javax.swing.JPanel {
     private javax.swing.JPanel addPregunta;
     private javax.swing.JLabel borrarPreguntaLabel;
     private javax.swing.JTextField correctaLabel;
-    private javax.swing.JLabel hSpace;
     private javax.swing.JTextField incorrectaLabel1;
     private javax.swing.JTextField incorrectaLabel2;
     private javax.swing.JTextField incorrectaLabel3;
@@ -210,4 +207,46 @@ public class PreguntaView extends javax.swing.JPanel {
     private java.awt.Label label3;
     private javax.swing.JTextField preguntaLabel;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getCorrectaLabel() {
+        return correctaLabel;
+    }
+
+    public void setCorrectaLabel(JTextField correctaLabel) {
+        this.correctaLabel = correctaLabel;
+    }
+
+    public JTextField getIncorrectaLabel1() {
+        return incorrectaLabel1;
+    }
+
+    public void setIncorrectaLabel1(JTextField incorrectaLabel1) {
+        this.incorrectaLabel1 = incorrectaLabel1;
+    }
+
+    public JTextField getIncorrectaLabel2() {
+        return incorrectaLabel2;
+    }
+
+    public void setIncorrectaLabel2(JTextField incorrectaLabel2) {
+        this.incorrectaLabel2 = incorrectaLabel2;
+    }
+
+    public JTextField getIncorrectaLabel3() {
+        return incorrectaLabel3;
+    }
+
+    public void setIncorrectaLabel3(JTextField incorrectaLabel3) {
+        this.incorrectaLabel3 = incorrectaLabel3;
+    }
+
+    public JTextField getPreguntaLabel() {
+        return preguntaLabel;
+    }
+
+    public void setPreguntaLabel(JTextField preguntaLabel) {
+        this.preguntaLabel = preguntaLabel;
+    }
+
+    
 }
