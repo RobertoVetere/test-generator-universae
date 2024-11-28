@@ -1,6 +1,9 @@
 package main;
 
 
+import views.GeneratorView;
+import models.SimuladorTipo;
+import models.Pregunta;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ public class Main extends javax.swing.JFrame {
     
     private static final Dimension SIZE = new Dimension(430, 932);
     private List<SimuladorTipo> listaSimuladores = new ArrayList<>();
-    private SimuladorService simuladorService;
+    private SimuladorService simuladorService = SimuladorService.getInstance();
 
     /**
      * Creates new form main
@@ -31,8 +34,9 @@ public class Main extends javax.swing.JFrame {
         GeneratorView p1 = new GeneratorView();
         this.setResizable(false);
         showPanel(p1);
-        this.simuladorService = new SimuladorService();
         this.simuladorService.cargarSimuladores();
+        listaSimuladores = this.simuladorService.getSimuladoresList();
+        //checkSimuladoresList();
         this.revalidate();
     }
 
@@ -137,4 +141,19 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void checkSimuladoresList() {
+        for (int i = 0; i < listaSimuladores.size(); i++) {
+            SimuladorTipo simulador = listaSimuladores.get(i); // Obtenemos el simulador en la posición i
+            System.out.println("Simulador " + (i + 1) + ": " + simulador.getsimuladorRuta()); // Mostramos el nombre o ruta del simulador
+
+            // Si deseas imprimir las preguntas del simulador:
+            List<Pregunta> preguntas = simulador.getListaPreguntas(); // Asegúrate de que SimuladorTipo tenga un método getPreguntas()
+            for (Pregunta pregunta : preguntas) {
+                System.out.println("  Pregunta: " + pregunta.getPregunta());
+                System.out.println("  Respuesta correcta: " + pregunta.getRespuestaCorrecta());
+                System.out.println("  Respuestas incorrectas: " + String.join(", ", pregunta.getRespuestasIncorrectas()));
+            }
+        }
+    }
 }

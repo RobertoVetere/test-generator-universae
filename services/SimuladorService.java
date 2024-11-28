@@ -1,99 +1,118 @@
 package services;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import main.Pregunta;
-import main.SimuladorTipo;
+import models.Pregunta;
+import models.SimuladorTipo;
 import utils.Utils;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author admin
- */
 public class SimuladorService {
-    
-    public List<SimuladorTipo> simuladoresList = new ArrayList<>();
-    
-    List<File> archivosCSV = new ArrayList<>();
 
-    
-    public void cargarSimuladores(){
-        cargarArchivosCSV("build/classes/repositories/");
-        crearListaDeSimuladores();
-        
-        imprimirArchivosCSV();
+    private static SimuladorService instance;
+    private final List<SimuladorTipo> simuladoresList = new ArrayList<>();
+
+    // Constructor privado para evitar instanciación directa
+    private SimuladorService() {
     }
-    
-    
- private void cargarArchivosCSV(String directorio) {
-        // Crear el objeto File que representa el directorio
-        File dir = new File(directorio);
-        
-        System.out.println("Buscando archivos CSV en el directorio: " + dir.getAbsolutePath());
 
-        
-        // Verificar que el directorio existe y es un directorio
+    // Método estático para obtener la única instancia de la clase
+    public static SimuladorService getInstance() {
+        if (instance == null) {
+            instance = new SimuladorService();
+        }
+        return instance;
+    }
+
+    public void cargarSimuladores() {
+        // Cargar archivos CSV desde el directorio especificado
+        List<File> archivosCSV = cargarArchivosCSV("build/classes/repositories/");
+        // Crear simuladores con base en los archivos cargados
+        crearListaDeSimuladores(archivosCSV);
+        // Imprimir los archivos cargados
+        imprimirArchivosCSV(archivosCSV);
+    }
+
+    private List<File> cargarArchivosCSV(String directorio) {
+        List<File> archivosCSV = new ArrayList<>();
+        File dir = new File(directorio);
+
+        //System.out.println("Buscando archivos CSV en el directorio: " + dir.getAbsolutePath());
+
         if (dir.exists() && dir.isDirectory()) {
-            // Obtener todos los archivos en el directorio que terminan en .csv
             File[] archivos = dir.listFiles((file, name) -> name.toLowerCase().endsWith(".csv"));
-            
-            // Si hay archivos CSV, agregarlos a la lista
             if (archivos != null) {
                 for (File archivo : archivos) {
-                    archivosCSV.add(archivo); // Agregar el archivo a la lista privada
+                    archivosCSV.add(archivo);
                 }
             }
         }
+        return archivosCSV;
     }
-    
- 
- private void imprimirArchivosCSV() {
+
+    private void imprimirArchivosCSV(List<File> archivosCSV) {
         if (archivosCSV.isEmpty()) {
-            System.out.println("No se encontraron archivos CSV en el directorio.");
+            System.out.println("Mensaje desde SimuladorService: No se encontraron archivos CSV en el directorio.");
         } else {
-            System.out.println("Archivos CSV cargados:");
+            System.out.println("Mensaje desde SimuladorService:  Archivos CSV cargados:");
             for (File archivo : archivosCSV) {
-                System.out.println(archivo.getName()); // Imprimir el nombre del archivo
+                System.out.println("Mensaje desde SimuladorService: CSV" + archivo.getName());
             }
         }
     }
 
-    private void crearListaDeSimuladores() {
-        for (File archivo : archivosCSV) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
-                String linea;
-                while ((linea = reader.readLine()) != null) {
-                    String[] partes = linea.split(";");
+   private void crearListaDeSimuladores(List<File> archivosCSV) {
+    simuladoresList.clear(); // Limpiar lista para evitar duplicados si se llama varias veces
+    for (File archivo : archivosCSV) {
+        SimuladorTipo simulador = new SimuladorTipo(); // Crear un nuevo simulador para cada archivo
+        simulador.setName(Utils.formatearNombreArchivo(archivo.getName()));
+        simulador.setsimuladorRuta(archivo.getName()); // Asignar el nombre formateado
 
-                    if (partes.length == 5) {
-                        String preguntaTexto = partes[0];
-                        String respuestaCorrecta = partes[1];
-                        String[] respuestasIncorrectas = new String[]{partes[2], partes[3], partes[4]};
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(";");
 
-                        Pregunta pregunta = new Pregunta(preguntaTexto, respuestaCorrecta, respuestasIncorrectas);
+                if (partes.length == 5) {
+                    String preguntaTexto = partes[0];
+                    String respuestaCorrecta = partes[1];
+                    String[] respuestasIncorrectas = new String[]{partes[2], partes[3], partes[4]};
 
-                        // Crear el simulador y asignar el nombre del archivo como simuladorRuta
-                        SimuladorTipo simulador = new SimuladorTipo();
-                        simulador.setsimuladorRuta(Utils.formatearNombreArchivo(archivo.getName())); // Asignar el nombre formateado
-                        simulador.agregarPregunta(pregunta);
-
-                        simuladoresList.add(simulador);
-                    }
+                    Pregunta pregunta = new Pregunta(preguntaTexto, respuestaCorrecta, respuestasIncorrectas);
+                    simulador.agregarPregunta(pregunta); // Agregar pregunta al simulador actual
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        // Agregar el simulador a la lista sin verificar si tiene preguntas
+        simuladoresList.add(simulador); // Ahora se agregan todos los simuladores, sin importar si tienen preguntas
+
+        // Mensaje para indicar si el archivo estaba vacío o no
+        if (simulador.getListaPreguntas().isEmpty()) {
+            System.out.println("Mensaje desde SimuladorService:  El archivo " + archivo.getName() + " está vacío.");
+        }
+    }
+}
+
+
+    public List<SimuladorTipo> getSimuladoresList() {
+        if (simuladoresList.isEmpty()) {
+            System.out.println("Mensaje desde SimuladorService:  La lista de simuladores está vacía. ¿Llamaste a cargarSimuladores()?");
+        }
+        return simuladoresList;
     }
     
+    public SimuladorTipo obtenerSimuladorPorNombre(String name) {
+    for (SimuladorTipo simulador : simuladoresList) {
+        if (simulador.getName().equals(name)) {
+            return simulador;  // Si encuentra el simulador, lo retorna
+        }
+    }
+    return null;  // Si no encuentra el simulador, retorna null
+}
 }

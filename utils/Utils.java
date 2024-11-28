@@ -6,13 +6,15 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.Pregunta;
+import models.Pregunta;
 
 /**
  *
  * @author admin
  */
 public class Utils {
+
+    
     
     // La lista de preguntas que será gestionada por el singleton
     private List<Pregunta> listaPreguntas = new ArrayList<>();
