@@ -6,10 +6,17 @@ import models.SimuladorTipo;
 import models.Pregunta;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import services.SimuladorService;
+import utils.Utils;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -31,6 +38,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        Utils.setMainFrame(this);
+        setGlobalFont();
         GeneratorView p1 = new GeneratorView();
         this.setResizable(false);
         showPanel(p1);
@@ -154,6 +163,37 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("  Respuesta correcta: " + pregunta.getRespuestaCorrecta());
                 System.out.println("  Respuestas incorrectas: " + String.join(", ", pregunta.getRespuestasIncorrectas()));
             }
+        }
+    }
+
+    private void setGlobalFont() {
+        try {
+            // Cargar la fuente desde el archivo .ttf
+            Font ralewayFont = Font.createFont(Font.TRUETYPE_FONT, new File("build/classes/resources/fonts/Raleway-VariableFont_wght.ttf"));
+
+            // Registrar la fuente en el entorno gráfico
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(ralewayFont);
+
+            // Establecer la fuente globalmente para todos los componentes
+            // Esto afecta tanto a las fuentes de los componentes estándar como a otros personalizados.
+            UIManager.put("defaultFont", ralewayFont);
+            
+            // Establecer la fuente en el Look and Feel (esto hará que la fuente se aplique globalmente)
+            UIManager.put("Label.font", ralewayFont);          // Para etiquetas (labels)
+            UIManager.put("Button.font", ralewayFont);         // Para botones (buttons)
+            UIManager.put("TextField.font", ralewayFont);      // Para campos de texto (text fields)
+            UIManager.put("TextArea.font", ralewayFont);       // Para áreas de texto (text areas)
+            UIManager.put("ComboBox.font", ralewayFont);       // Para combos (combo boxes)
+            UIManager.put("MenuItem.font", ralewayFont);       // Para ítems de menú (menu items)
+            UIManager.put("RadioButton.font", ralewayFont);    // Para botones de radio (radio buttons)
+            UIManager.put("CheckBox.font", ralewayFont);       // Para casillas de verificación (checkboxes)
+            UIManager.put("Table.font", ralewayFont);          // Para tablas (tables)
+            UIManager.put("TextPane.font", ralewayFont);       // Para panes de texto (text panes)
+            UIManager.put("TitledBorder.font", ralewayFont);   // Para bordes titulados (titled borders)
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

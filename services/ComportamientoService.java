@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import models.Pregunta;
 import models.SimuladorTipo;
+import utils.Utils;
+import utils.UtilsForImages;
 import views.GeneratorView;
 import views.PreguntaView;
 
@@ -19,6 +21,8 @@ import views.PreguntaView;
 public class ComportamientoService {
     
     private static GeneratorView generatorView;
+
+    
     private PreguntaView pregunta;
     private int scrollVentanaAltura; 
 
@@ -26,7 +30,8 @@ public class ComportamientoService {
         generatorView = view;
     }
 
-  public static void actualizaVistaPreguntas(String name) {
+  public static void actualizaVistaGeneratorView(String name) {
+    Utils.loader();
     SimuladorTipo simulador = SimuladorService.getInstance().obtenerSimuladorPorNombre(name); // Buscar el simulador por nombre
 
     if (simulador != null) {
@@ -65,20 +70,30 @@ public class ComportamientoService {
                         generatorView.getPreguntasContainer().add(preguntaView);
                     }
                 }
-
-                // Crear un JLabel con el nombre del simulador y agregarlo al contenedor
-                //JLabel simuladorNombreLabel = new JLabel();
-                //simuladorNombreLabel.setText(simulador.getName());
-                //generatorView.getPreguntasContainer().add(simuladorNombreLabel);
-                //System.out.println("Simulador en comportamiento: " + simulador.getName());
-
-                // Realizamos la revalidación y repaint para actualizar la vista
+                
+                UtilsForImages.setImageOnComponentAndSetResizeEvent(generatorView, generatorView.getDesplegableLabel(), "Desplegable_On.png");
+                generatorView.getModalContainer().setVisible(false);
+                generatorView.getModalContainer().setMinimumSize(new java.awt.Dimension(393, 54));
+                
+                
+                
+                setCrearLabel(generatorView.getCrearLabel());
+                generatorView.setCheckCrearLabel(true);
+                
                 generatorView.getPreguntasContainer().revalidate();
                 generatorView.getPreguntasContainer().repaint();
+                
+                Utils.finishLoading();
             });
         }
     } else {
         System.out.println("Simulador no encontrado con el nombre: " + name);
     }
 }
+  
+    public static void setCrearLabel(JLabel crearLabel) {
+       UtilsForImages.setImageOnComponentAndSetResizeEvent(generatorView, crearLabel, "Cilindrico_On.png");
+       crearLabel.revalidate();
+       crearLabel.repaint();
+    }
 }

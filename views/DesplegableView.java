@@ -7,11 +7,11 @@ package views;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
-import models.Pregunta;
 import models.SimuladorTipo;
 import services.ComportamientoService;
 import services.SimuladorService;
 import utils.Utils;
+import utils.UtilsForImages;
 
 /**
  *
@@ -58,15 +58,14 @@ public class DesplegableView extends javax.swing.JPanel {
         btnContainer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(10, 38, 72));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(136, 140, 142)));
 
-        btnContainer.setBackground(new java.awt.Color(10, 38, 72));
+        btnContainer.setBackground(new java.awt.Color(136, 158, 185));
 
         javax.swing.GroupLayout btnContainerLayout = new javax.swing.GroupLayout(btnContainer);
         btnContainer.setLayout(btnContainerLayout);
         btnContainerLayout.setHorizontalGroup(
             btnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
         btnContainerLayout.setVerticalGroup(
             btnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +115,8 @@ public class DesplegableView extends javax.swing.JPanel {
             // Añadir el evento de clic al JLabel
             simuladorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // Lógica para manejar el clic
-                    //System.out.println("Simulador en Comportamiento: " + simulador.getsimuladorRuta());
-                    ComportamientoService.actualizaVistaPreguntas(simulador.getName());
+                    Utils.playClickSound();
+                    ComportamientoService.actualizaVistaGeneratorView(simulador.getName());
                 }
 
                 public void mouseEntered(java.awt.event.MouseEvent evt) {

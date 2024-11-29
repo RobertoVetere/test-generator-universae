@@ -4,13 +4,13 @@ package views;
 
 
 import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import services.ComportamientoService;
 import utils.LookAndFeel;
+import utils.Utils;
 import utils.UtilsForImages;
 
 /*
@@ -27,6 +27,7 @@ public class GeneratorView extends javax.swing.JPanel {
     private LookAndFeel lookAndFeel;
     private boolean checkImage = true;
     DesplegableView desplegable = new DesplegableView();
+    private boolean checkCrearLabel = false;
     
 
     /**
@@ -47,7 +48,9 @@ public class GeneratorView extends javax.swing.JPanel {
     }
     
     
-
+    public JLabel getCrearLabel() {
+        return crearLabel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,6 +235,11 @@ public class GeneratorView extends javax.swing.JPanel {
         addPreguntaLabel.setMaximumSize(new java.awt.Dimension(20, 20));
         addPreguntaLabel.setMinimumSize(new java.awt.Dimension(20, 20));
         addPreguntaLabel.setPreferredSize(new java.awt.Dimension(20, 20));
+        addPreguntaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addPreguntaLabelMouseClicked(evt);
+            }
+        });
         addPregunta.add(addPreguntaLabel);
 
         hSpace.setMaximumSize(new java.awt.Dimension(10, 20));
@@ -243,6 +251,11 @@ public class GeneratorView extends javax.swing.JPanel {
         infoIconLabel.setMaximumSize(new java.awt.Dimension(20, 20));
         infoIconLabel.setMinimumSize(new java.awt.Dimension(20, 20));
         infoIconLabel.setPreferredSize(new java.awt.Dimension(20, 20));
+        infoIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                infoIconLabelMouseClicked(evt);
+            }
+        });
         addPregunta.add(infoIconLabel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -262,6 +275,11 @@ public class GeneratorView extends javax.swing.JPanel {
         crearLabel.setText("Crear");
         crearLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crearLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        crearLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout crearContainerLayout = new javax.swing.GroupLayout(crearContainer);
         crearContainer.setLayout(crearContainerLayout);
@@ -322,11 +340,13 @@ public class GeneratorView extends javax.swing.JPanel {
 
     private void desplegableLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desplegableLabelMouseClicked
         if (checkImage) {      
+        Utils.playClickSound();
         UtilsForImages.setImageOnComponentAndSetResizeEvent(this, desplegableLabel, "Desplegable_Off.png");
         modalContainer.setVisible(true);
         int alturaModal = desplegable.getCantidadSimuladores() * desplegable.getSimuladorLabelTamaño();
         modalContainer.setMinimumSize(new java.awt.Dimension(393, alturaModal)); // Cambia el tamaño preferido
     } else {
+        Utils.playClickSound();    
         UtilsForImages.setImageOnComponentAndSetResizeEvent(this, desplegableLabel, "Desplegable_On.png");
         modalContainer.setVisible(false);
         modalContainer.setMinimumSize(new java.awt.Dimension(393, 54)); // Cambia el tamaño preferido
@@ -338,6 +358,20 @@ public class GeneratorView extends javax.swing.JPanel {
         desplegableContainer.repaint();
         checkImage = !checkImage;   
     }//GEN-LAST:event_desplegableLabelMouseClicked
+
+    private void addPreguntaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPreguntaLabelMouseClicked
+        Utils.playClickSound();
+    }//GEN-LAST:event_addPreguntaLabelMouseClicked
+
+    private void infoIconLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoIconLabelMouseClicked
+        Utils.playClickSound();
+    }//GEN-LAST:event_infoIconLabelMouseClicked
+
+    private void crearLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearLabelMouseClicked
+        if(checkCrearLabel == true){
+            Utils.playClickSound();
+        }
+    }//GEN-LAST:event_crearLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPregunta;
@@ -362,7 +396,7 @@ public class GeneratorView extends javax.swing.JPanel {
 
     private void setBgImagesOnLabels() {
          UtilsForImages.setImageOnComponentAndSetResizeEvent(this, desplegableLabel, "Desplegable_On.png");
-         UtilsForImages.setImageOnComponentAndSetResizeEvent(this, crearLabel, "Boton_Off.png");
+         UtilsForImages.setImageOnComponentAndSetResizeEvent(this, crearLabel, "Cilindrico_Off.png");
          UtilsForImages.setImageOnComponentAndSetResizeEvent(this, infoIconLabel, "Info_Off.png");
          UtilsForImages.setImageOnComponentAndSetResizeEvent(this, addPreguntaLabel, "Mas_Off.png");
            
@@ -375,31 +409,93 @@ public class GeneratorView extends javax.swing.JPanel {
     modalContainer.repaint(); // Vuelve a dibujar
 }
 
-    private void myInitComponents() {
-        // Configuración inicial
-        desplegableContainer.setMaximumSize(new java.awt.Dimension(400, Integer.MAX_VALUE));
-        scrollContainer.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(5, 0));
-        scrollContainer.getVerticalScrollBar().setBackground(Color.DARK_GRAY);  // Fondo oscuro
-        scrollContainer.getVerticalScrollBar().setUnitIncrement(16);  // Incremento más rápido
- // Barra vertical fina
-        //scrollContainer.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(0, 5)); // Bar
+  private void myInitComponents() {
+    // Configuración inicial
+    desplegableContainer.setMaximumSize(new java.awt.Dimension(400, Integer.MAX_VALUE));
 
-        desplegable.setVisible(false); // Asegúrate de que el modal no sea visible inicialmente
-        modalContainer.add(desplegable); // Agrega el modal a su contenedor
-        modalContainer.setVisible(false);
-
-        // Listener para el label
-        desplegableLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+    // Configuración de la barra de desplazamiento vertical
+    JScrollBar verticalScrollBar = scrollContainer.getVerticalScrollBar();
+    if (verticalScrollBar != null) {
+        verticalScrollBar.setPreferredSize(new java.awt.Dimension(5, Integer.MAX_VALUE)); // Barra delgada y larga
+        verticalScrollBar.setBackground(Color.DARK_GRAY);  // Fondo oscuro
+        verticalScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                toggleDesplegable();
+            protected void configureScrollBarColors() {
+                thumbDarkShadowColor = Color.GRAY;
+                thumbHighlightColor = Color.GRAY;
+                //thumbShadowColor = Color.GRAY;
+                thumbColor = Color.LIGHT_GRAY;
+                trackColor = Color.DARK_GRAY;
+            }
+
+            @Override
+            protected javax.swing.JButton createDecreaseButton(int orientation) {
+                return new javax.swing.JButton() {
+                    @Override
+                    public java.awt.Dimension getPreferredSize() {
+                        return new java.awt.Dimension(0, 0);
+                    }
+                };
+            }
+
+            @Override
+            protected javax.swing.JButton createIncreaseButton(int orientation) {
+                return new javax.swing.JButton() {
+                    @Override
+                    public java.awt.Dimension getPreferredSize() {
+                        return new java.awt.Dimension(0, 0);
+                    }
+                };
+            }
+
+            @Override
+            protected void paintTrack(java.awt.Graphics g, javax.swing.JComponent c, java.awt.Rectangle trackBounds) {
+                g.setColor(trackColor);
+                g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+            }
+
+            @Override
+            protected void paintThumb(java.awt.Graphics g, javax.swing.JComponent c, java.awt.Rectangle thumbBounds) {
+                g.setColor(thumbColor);
+                g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
             }
         });
+        verticalScrollBar.setUnitIncrement(16);  // Incremento rápido
     }
+
+    // Eliminar bordes
+    scrollContainer.setBorder(null);
+
+    // Configuración del desplegable
+    desplegable.setVisible(false); // Asegúrate de que el modal no sea visible inicialmente
+    modalContainer.setBorder(null); // Eliminar bordes del contenedor del modal
+    modalContainer.add(desplegable); // Agrega el modal a su contenedor
+    modalContainer.setVisible(false);
+
+    // Listener para el label
+    desplegableLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            toggleDesplegable();
+        }
+    });
+}
     private void toggleDesplegable() {
         boolean isCurrentlyVisible = desplegable.isVisible();
         desplegable.setVisible(!isCurrentlyVisible); // Cambia la visibilidad
         modalContainer.revalidate(); // Actualiza el contenedor
         modalContainer.repaint();
+    }
+
+    public JLabel getDesplegableLabel() {
+        return desplegableLabel;
+    }
+
+    public JPanel getModalContainer() {
+        return modalContainer;
+    }
+
+    public void setCheckCrearLabel(boolean b) {
+        checkCrearLabel = b;
     }
 }

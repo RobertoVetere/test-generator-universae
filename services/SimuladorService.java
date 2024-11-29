@@ -1,8 +1,10 @@
 package services;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,11 +110,37 @@ public class SimuladorService {
     }
     
     public SimuladorTipo obtenerSimuladorPorNombre(String name) {
-    for (SimuladorTipo simulador : simuladoresList) {
-        if (simulador.getName().equals(name)) {
-            return simulador;  // Si encuentra el simulador, lo retorna
+        for (SimuladorTipo simulador : simuladoresList) {
+            if (simulador.getName().equals(name)) {
+                return simulador;  // Si encuentra el simulador, lo retorna
+            }
+        }
+        return null;  // Si no encuentra el simulador, retorna null
+    }
+    
+    
+    public void actualizarCSV(String name) {
+        SimuladorTipo simulador = obtenerSimuladorPorNombre(name); // Buscar simulador por nombre
+        if (simulador != null) {
+            File archivoCSV = new File("build/classes/repositories/" + simulador.getsimuladorRuta()); // Ruta del archivo CSV
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoCSV))) {
+                // Escribir los datos del simulador de nuevo en el archivo CSV
+                for (Pregunta pregunta : simulador.getListaPreguntas()) {
+                    // Formatear cada pregunta y respuesta en formato CSV
+                    String linea = pregunta.getPregunta() + ";" 
+                        + pregunta.getRespuestaCorrecta() + ";" 
+                        + pregunta.getRespuestasIncorrectas()[0] + ";" 
+                        + pregunta.getRespuestasIncorrectas()[1] + ";" 
+                        + pregunta.getRespuestasIncorrectas()[2];
+                    writer.write(linea);
+                    writer.newLine(); // Nueva línea para cada pregunta
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error al actualizar el archivo CSV.");
+            }
+        } else {
+            System.out.println("Simulador con el nombre '" + name + "' no encontrado.");
         }
     }
-    return null;  // Si no encuentra el simulador, retorna null
-}
 }
