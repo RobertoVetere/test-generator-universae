@@ -4,11 +4,18 @@ package views;
 
 
 import java.awt.Color;
-import javax.swing.JComponent;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.SwingUtilities;
 import services.ComportamientoService;
+import services.ConfigService;
+import services.SimuladorService;
 import utils.LookAndFeel;
 import utils.Utils;
 import utils.UtilsForImages;
@@ -28,6 +35,8 @@ public class GeneratorView extends javax.swing.JPanel {
     private boolean checkImage = true;
     DesplegableView desplegable = new DesplegableView();
     private boolean checkCrearLabel = false;
+    private final SimuladorService simuladorService = SimuladorService.getInstance();
+    private final ConfigService configService = ConfigService.getInstance();
     
 
     /**
@@ -75,18 +84,20 @@ public class GeneratorView extends javax.swing.JPanel {
         addPreguntaLabel = new javax.swing.JLabel();
         hSpace = new javax.swing.JLabel();
         infoIconLabel = new javax.swing.JLabel();
+        containerInfoPanel = new javax.swing.JPanel();
+        infoLabel = new javax.swing.JLabel();
         crearContainer = new javax.swing.JPanel();
         crearLabel = new javax.swing.JLabel();
         debugContainer = new javax.swing.JPanel();
         label4 = new java.awt.Label();
 
-        setBackground(new java.awt.Color(10, 38, 72));
+        setBackground(new java.awt.Color(16, 30, 46));
         setMaximumSize(new java.awt.Dimension(430, 932));
         setMinimumSize(new java.awt.Dimension(430, 932));
         setPreferredSize(new java.awt.Dimension(430, 932));
         setLayout(new java.awt.GridBagLayout());
 
-        tituloContainer.setBackground(new java.awt.Color(10, 38, 72));
+        tituloContainer.setBackground(new java.awt.Color(16, 30, 46));
 
         titulo.setAlignment(java.awt.Label.CENTER);
         titulo.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -114,7 +125,7 @@ public class GeneratorView extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         add(tituloContainer, gridBagConstraints);
 
-        tipoContainer.setBackground(new java.awt.Color(10, 38, 72));
+        tipoContainer.setBackground(new java.awt.Color(16, 30, 46));
 
         tipoTitulo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         tipoTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,7 +154,7 @@ public class GeneratorView extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(tipoContainer, gridBagConstraints);
 
-        desplegableContainer.setBackground(new java.awt.Color(10, 38, 72));
+        desplegableContainer.setBackground(new java.awt.Color(16, 30, 46));
         desplegableContainer.setMinimumSize(new java.awt.Dimension(400, 80));
         desplegableContainer.setPreferredSize(new java.awt.Dimension(404, 250));
 
@@ -186,7 +197,7 @@ public class GeneratorView extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(desplegableContainer, gridBagConstraints);
 
-        modalContainer.setBackground(new java.awt.Color(10, 38, 72));
+        modalContainer.setBackground(new java.awt.Color(16, 30, 46));
         modalContainer.setMinimumSize(new java.awt.Dimension(380, 300));
         modalContainer.setPreferredSize(new java.awt.Dimension(350, 50));
 
@@ -210,7 +221,7 @@ public class GeneratorView extends javax.swing.JPanel {
         scrollContainer.setMinimumSize(new java.awt.Dimension(404, 400));
         scrollContainer.setName(""); // NOI18N
 
-        preguntasContainer.setBackground(new java.awt.Color(10, 38, 72));
+        preguntasContainer.setBackground(new java.awt.Color(16, 30, 46));
         preguntasContainer.setMinimumSize(new java.awt.Dimension(280, 900));
         preguntasContainer.setPreferredSize(new java.awt.Dimension(280, 900));
         preguntasContainer.setLayout(new javax.swing.BoxLayout(preguntasContainer, javax.swing.BoxLayout.Y_AXIS));
@@ -218,10 +229,10 @@ public class GeneratorView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         add(scrollContainer, gridBagConstraints);
 
-        addPregunta.setBackground(new java.awt.Color(10, 38, 72));
+        addPregunta.setBackground(new java.awt.Color(16, 30, 46));
         addPregunta.setMinimumSize(new java.awt.Dimension(95, 0));
         addPregunta.setPreferredSize(new java.awt.Dimension(95, 100));
         addPregunta.setLayout(new javax.swing.BoxLayout(addPregunta, javax.swing.BoxLayout.LINE_AXIS));
@@ -266,9 +277,25 @@ public class GeneratorView extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(addPregunta, gridBagConstraints);
 
-        crearContainer.setBackground(new java.awt.Color(10, 38, 72));
+        containerInfoPanel.setBackground(new java.awt.Color(16, 30, 46));
+        containerInfoPanel.setMinimumSize(new java.awt.Dimension(400, 0));
+        containerInfoPanel.setPreferredSize(new java.awt.Dimension(400, 0));
+        containerInfoPanel.setLayout(new javax.swing.BoxLayout(containerInfoPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        infoLabel.setBackground(new java.awt.Color(16, 30, 46));
+        infoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoLabel.setMinimumSize(new java.awt.Dimension(390, 100));
+        containerInfoPanel.add(infoLabel);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 5;
+        add(containerInfoPanel, gridBagConstraints);
+
+        crearContainer.setBackground(new java.awt.Color(16, 30, 46));
         crearContainer.setMinimumSize(new java.awt.Dimension(380, 76));
 
+        crearLabel.setBackground(new java.awt.Color(16, 30, 46));
         crearLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         crearLabel.setForeground(new java.awt.Color(0, 51, 102));
         crearLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -300,14 +327,15 @@ public class GeneratorView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 22;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(crearContainer, gridBagConstraints);
 
-        debugContainer.setBackground(new java.awt.Color(10, 38, 72));
+        debugContainer.setBackground(new java.awt.Color(16, 30, 46));
 
+        label4.setBackground(new java.awt.Color(16, 30, 46));
         label4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         label4.setForeground(new java.awt.Color(255, 153, 0));
         label4.setText("El simulador no tiene preguntas");
@@ -318,8 +346,7 @@ public class GeneratorView extends javax.swing.JPanel {
             debugContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(debugContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
         );
         debugContainerLayout.setVerticalGroup(
             debugContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +358,7 @@ public class GeneratorView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 173;
         gridBagConstraints.ipady = 59;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -360,22 +387,92 @@ public class GeneratorView extends javax.swing.JPanel {
     }//GEN-LAST:event_desplegableLabelMouseClicked
 
     private void addPreguntaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPreguntaLabelMouseClicked
-        Utils.playClickSound();
+         if (simuladorService.getSimuladorSeleccionado() != null) {
+            Utils.playClickSound();
+            int numPreguntas = simuladorService.tieneXPreguntas(simuladorService.getSimuladorSeleccionado().getName());
+             if (numPreguntas < configService.getSimulatorQuestionNumber()) {
+                 
+                 System.out.println("El numero de preguntas es menor");
+             }else{
+                 Utils.mostrarMensaje(this, "warning", "Máximo de preguntas alcanzado: " + numPreguntas, "Aviso");
+             }
+            
+            System.out.println("El simulador tiene: " + numPreguntas + " preguntas");
+        } else {
+            Utils.playClickSound();
+            Utils.mostrarMensaje(this, "warning", "No ha seleccionado ningún simulador.", "Aviso");
+         }
     }//GEN-LAST:event_addPreguntaLabelMouseClicked
 
     private void infoIconLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoIconLabelMouseClicked
         Utils.playClickSound();
+
+    if (containerInfoPanel == null) {
+        throw new IllegalStateException("El panel containerInfoPanel no está inicializado.");
+    }
+
+    Dimension currentSize = containerInfoPanel.getPreferredSize();
+
+    if (currentSize.height < 100) {
+        // Expandir el panel a 100 de altura
+        containerInfoPanel.setPreferredSize(new Dimension(currentSize.width, 100));
+        containerInfoPanel.setMinimumSize(new Dimension(currentSize.width, 100));
+        containerInfoPanel.setMaximumSize(new Dimension(currentSize.width, 100));
+
+        // Crear un JLayeredPane para superponer el texto sobre la imagen
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(currentSize.width, 100));
+
+        // Crear y establecer la imagen de fondo en el infoLabel
+        JLabel infoLabel = new JLabel();
+        UtilsForImages.setImageOnComponentAndSetResizeEvent(this, infoLabel, "Panel_info.png");
+        infoLabel.setBounds(0, 0, currentSize.width, 100);
+        layeredPane.add(infoLabel, JLayeredPane.DEFAULT_LAYER);
+
+        // Crear un JLabel para el texto
+        JLabel textLabel = new JLabel("Este es un mensaje informativo");
+        textLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        textLabel.setForeground(Color.WHITE); // Color del texto
+        textLabel.setBounds(10, 10, currentSize.width - 20, 30); // Ajusta la posición y el tamaño del texto
+        layeredPane.add(textLabel, JLayeredPane.PALETTE_LAYER);
+
+        // Agregar el JLayeredPane al contenedor
+        containerInfoPanel.add(layeredPane);
+
+        // Validar cambios
+        containerInfoPanel.revalidate();
+        containerInfoPanel.repaint();
+    } else {
+        // Colapsar el panel a altura cero
+        containerInfoPanel.setPreferredSize(new Dimension(currentSize.width, 0));
+        containerInfoPanel.setMinimumSize(new Dimension(currentSize.width, 0));
+        containerInfoPanel.setMaximumSize(new Dimension(currentSize.width, 0));
+
+        // Eliminar el JLayeredPane de containerInfoPanel si ya está visible
+        for (Component comp : containerInfoPanel.getComponents()) {
+            if (comp instanceof JLayeredPane) {
+                containerInfoPanel.remove(comp);
+            }
+        }
+
+        // Validar cambios
+        containerInfoPanel.revalidate();
+        containerInfoPanel.repaint();
+    }
+
     }//GEN-LAST:event_infoIconLabelMouseClicked
 
     private void crearLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearLabelMouseClicked
         if(checkCrearLabel == true){
             Utils.playClickSound();
+            simuladorService.comprimirSimuladorCSV(simuladorService.getSimuladorSeleccionado().getName(), this);
         }
     }//GEN-LAST:event_crearLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPregunta;
     private javax.swing.JLabel addPreguntaLabel;
+    private javax.swing.JPanel containerInfoPanel;
     private javax.swing.JPanel crearContainer;
     private javax.swing.JLabel crearLabel;
     private javax.swing.JPanel debugContainer;
@@ -383,6 +480,7 @@ public class GeneratorView extends javax.swing.JPanel {
     private javax.swing.JLabel desplegableLabel;
     private javax.swing.JLabel hSpace;
     private javax.swing.JLabel infoIconLabel;
+    private javax.swing.JLabel infoLabel;
     private java.awt.Label label3;
     private java.awt.Label label4;
     private javax.swing.JPanel modalContainer;
@@ -463,21 +561,23 @@ public class GeneratorView extends javax.swing.JPanel {
         verticalScrollBar.setUnitIncrement(16);  // Incremento rápido
     }
 
-    // Eliminar bordes
-    scrollContainer.setBorder(null);
+        // Eliminar bordes
+        scrollContainer.setBorder(null);
 
-    // Configuración del desplegable
-    desplegable.setVisible(false); // Asegúrate de que el modal no sea visible inicialmente
-    modalContainer.setBorder(null); // Eliminar bordes del contenedor del modal
-    modalContainer.add(desplegable); // Agrega el modal a su contenedor
-    modalContainer.setVisible(false);
+        // Configuración del desplegable
+        desplegable.setVisible(false); // Asegúrate de que el modal no sea visible inicialmente
+        modalContainer.setBorder(null); // Eliminar bordes del contenedor del modal
+        modalContainer.add(desplegable); // Agrega el modal a su contenedor
+        modalContainer.setVisible(false);
+        
+        Utils.setRoundedBorders(desplegableLabel, 10, 10, 10, 10);
 
-    // Listener para el label
-    desplegableLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            toggleDesplegable();
-        }
+        // Listener para el label
+        desplegableLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toggleDesplegable();
+            }
     });
 }
     private void toggleDesplegable() {
@@ -498,4 +598,7 @@ public class GeneratorView extends javax.swing.JPanel {
     public void setCheckCrearLabel(boolean b) {
         checkCrearLabel = b;
     }
+    
+    
+    
 }

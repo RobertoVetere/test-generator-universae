@@ -92,51 +92,53 @@ public class DesplegableView extends javax.swing.JPanel {
       
 
     private void setSimuladoresTitulo() {
-        // Limpiar el panel de contenedor
-        btnContainer.removeAll();
-        btnContainer.setLayout(new javax.swing.BoxLayout(btnContainer, javax.swing.BoxLayout.Y_AXIS)); // Asegura un layout adecuado
+    // Limpiar el panel de contenedor
+    btnContainer.removeAll();
+    btnContainer.setLayout(new javax.swing.BoxLayout(btnContainer, javax.swing.BoxLayout.Y_AXIS)); // Asegura un layout adecuado
 
-        for (int i = 0; i < listaSimuladores.size(); i++) {
-            SimuladorTipo simulador = listaSimuladores.get(i);
-            cantidadSimuladores = listaSimuladores.size();
-            // Crear un nuevo JLabel para cada nombre de simulador
-            JLabel simuladorLabel = new JLabel(simulador.getName());
-            System.out.println("Agregando simulador: " + simulador.getName());
+    for (int i = 0; i < listaSimuladores.size(); i++) {
+        SimuladorTipo simulador = listaSimuladores.get(i);
+        cantidadSimuladores = listaSimuladores.size();
+        // Crear un nuevo JLabel para cada nombre de simulador
+        JLabel simuladorLabel = new JLabel(simulador.getName());
+        System.out.println("Agregando simulador: " + simulador.getName());
 
-            // Configuración del estilo para el JLabel
-            simuladorLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // Fuente tamaño 14
-            simuladorLabel.setForeground(new java.awt.Color(255, 255, 255)); // Texto blanco
-            simuladorLabel.setBackground(new java.awt.Color(10,38,72));
-            simuladorLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding
-            simuladorLabel.setOpaque(true);
-            simuladorLabel.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, simuladorLabelTamaño)); // Esto hará que el JLabel ocupe todo el ancho
-            simuladorLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        // Configuración del estilo para el JLabel
+        simuladorLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // Fuente tamaño 14
+        simuladorLabel.setForeground(new java.awt.Color(255, 255, 255)); // Texto blanco
+        simuladorLabel.setBackground(new java.awt.Color(10,38,72));
+        simuladorLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding
+        simuladorLabel.setOpaque(true);
+        simuladorLabel.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, simuladorLabelTamaño)); // Esto hará que el JLabel ocupe todo el ancho
+        simuladorLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
 
-            // Añadir el evento de clic al JLabel
-            simuladorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    Utils.playClickSound();
-                    ComportamientoService.actualizaVistaGeneratorView(simulador.getName());
-                }
+        // Añadir el evento de clic al JLabel
+        simuladorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Utils.playClickSound();
+                ComportamientoService.actualizaVistaGeneratorView(simulador.getName());
 
-                public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    simuladorLabel.setBackground(new java.awt.Color(200, 200, 200)); // Color al pasar el mouse
-                }
+                // Actualizar el simulador seleccionado en SimuladorService
+                simuladorService.setSimuladorSeleccionado(simulador);
+                System.out.println("Simulador seleccionado: " + simulador.getName());
+            }
 
-                public void mouseExited(java.awt.event.MouseEvent evt) {
-                    simuladorLabel.setBackground(new java.awt.Color(10,38,72)); // Restaurar color de fondo
-                }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                simuladorLabel.setBackground(new java.awt.Color(200, 200, 200)); // Color al pasar el mouse
+            }
 
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                simuladorLabel.setBackground(new java.awt.Color(10,38,72)); // Restaurar color de fondo
+            }
+        });
 
-            });
-
-            // Agregar el JLabel al contenedor de botones
-            btnContainer.add(simuladorLabel);
-        }
-
-        // Actualizar la interfaz para reflejar los cambios
-        btnContainer.revalidate();
-        btnContainer.repaint();
-        System.out.println("cantidad de simuladores: " + cantidadSimuladores);
+        // Agregar el JLabel al contenedor de botones
+        btnContainer.add(simuladorLabel);
     }
+
+    // Actualizar la interfaz para reflejar los cambios
+    btnContainer.revalidate();
+    btnContainer.repaint();
+    System.out.println("cantidad de simuladores: " + cantidadSimuladores);
+}
 }

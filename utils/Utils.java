@@ -4,9 +4,15 @@
  */
 package utils;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
+import java.awt.RenderingHints;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -17,9 +23,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -131,24 +139,98 @@ public class Utils {
     }
     
      public static void playClickSound() {
-    try {
-        // Carga el archivo de sonido desde la raíz de resources
-        InputStream audioSrc = Utils.class.getResourceAsStream("/resources/TouchScreenFfx.wav");
-        if (audioSrc == null) {
-            throw new IOException("Archivo de sonido no encontrado.");
-        }
+        try {
+            // Carga el archivo de sonido desde la raíz de resources
+            InputStream audioSrc = Utils.class.getResourceAsStream("/resources/TouchScreenFfx.wav");
+            if (audioSrc == null) {
+                throw new IOException("Archivo de sonido no encontrado.");
+            }
 
-        // Convertir el InputStream en AudioInputStream
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(audioSrc);
-        
-        // Obtener el clip y cargarlo con el archivo de sonido
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioIn);
-        
-        // Reproducir el sonido
-        clip.start();
-    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-        ex.printStackTrace();
+            // Convertir el InputStream en AudioInputStream
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(audioSrc);
+
+            // Obtener el clip y cargarlo con el archivo de sonido
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+
+            // Reproducir el sonido
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
     }
-}
+     
+    public static void setRoundedBorders(JComponent component, int topLeft, int topRight, int bottomLeft, int bottomRight) {
+        component.setOpaque(false); // Hacer que el fondo sea transparente para que se vea el borde redondeado correctamente
+
+        // Crear un JPanel personalizado con un borde redondeado
+        JPanel roundedPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // Suavizar bordes
+                g2d.setColor(component.getBackground()); // El color del borde es el mismo que el color del componente
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), topLeft, topRight); // Definición personalizada para la esquina redondeada
+            }
+        };
+
+        roundedPanel.setLayout(new BorderLayout());
+        roundedPanel.setPreferredSize(new Dimension(component.getPreferredSize().width, component.getPreferredSize().height));
+        roundedPanel.add(component, BorderLayout.CENTER);
+
+        component.setPreferredSize(new Dimension(component.getPreferredSize().width, component.getPreferredSize().height));
+    }
+        /**
+       * Formatea un texto para que se ajuste en varias líneas según el límite de caracteres por línea.
+       *
+       * @param texto         El texto a formatear.
+       * @param maxCaracteresPorLinea El número máximo de caracteres permitido por línea.
+       * @return El texto formateado con saltos de línea.
+       */
+      public static String formatearTexto(String texto, int maxCaracteresPorLinea) {
+          if (texto == null || texto.isEmpty()) {
+              return "";
+          }
+
+          StringBuilder resultado = new StringBuilder();
+          int longitudTexto = texto.length();
+
+          for (int i = 0; i < longitudTexto; i += maxCaracteresPorLinea) {
+              int fin = Math.min(i + maxCaracteresPorLinea, longitudTexto);
+              resultado.append(texto, i, fin).append("\n");
+          }
+
+          return resultado.toString().trim(); // Elimina el último salto de línea
+      }
+      
+      public static void mostrarMensaje(Component parentComponent, String tipoMensaje, String titulo, String mensaje) {
+        // Asegurarse de que el código se ejecute en el hilo de eventos de Swing
+        SwingUtilities.invokeLater(() -> {
+            int tipo = JOptionPane.INFORMATION_MESSAGE; // Valor por defecto
+
+            // Determinar el tipo de mensaje a mostrar
+            switch (tipoMensaje.toLowerCase()) {
+                case "warning":
+                    tipo = JOptionPane.WARNING_MESSAGE;
+                    break;
+                case "error":
+                    tipo = JOptionPane.ERROR_MESSAGE;
+                    break;
+                case "information":
+                    tipo = JOptionPane.INFORMATION_MESSAGE;
+                    break;
+                case "question":
+                    tipo = JOptionPane.QUESTION_MESSAGE;
+                    break;
+                // Puedes agregar más tipos según sea necesario
+                default:
+                    tipo = JOptionPane.PLAIN_MESSAGE;
+                    break;
+            }
+
+            // Mostrar el mensaje con el tipo y texto especificados
+            JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(parentComponent), mensaje, titulo, tipo);
+        });
+    }
 }

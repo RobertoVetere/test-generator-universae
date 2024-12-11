@@ -60,11 +60,11 @@ public class ComportamientoService {
                         PreguntaView preguntaView = new PreguntaView();
                         
                         // Establecer la pregunta, la respuesta correcta y las respuestas incorrectas
-                        preguntaView.getPreguntaLabel().setText(pregunta.getPregunta());
-                        preguntaView.getCorrectaLabel().setText(pregunta.getRespuestaCorrecta());
-                        preguntaView.getIncorrectaLabel1().setText(pregunta.getRespuestasIncorrectas()[0]);
-                        preguntaView.getIncorrectaLabel2().setText(pregunta.getRespuestasIncorrectas()[1]);
-                        preguntaView.getIncorrectaLabel3().setText(pregunta.getRespuestasIncorrectas()[2]);
+                        preguntaView.getPreguntaLabel().setText(Utils.formatearTexto(pregunta.getPregunta(), 50));
+                        preguntaView.getCorrectaLabel().setText(Utils.formatearTexto(pregunta.getRespuestaCorrecta(), 30));
+                        preguntaView.getIncorrectaLabel1().setText(Utils.formatearTexto(pregunta.getRespuestasIncorrectas()[0], 30));
+                        preguntaView.getIncorrectaLabel2().setText(Utils.formatearTexto(pregunta.getRespuestasIncorrectas()[1], 30));
+                        preguntaView.getIncorrectaLabel3().setText(Utils.formatearTexto(pregunta.getRespuestasIncorrectas()[2], 30));
                         
                         // Agregar el PreguntaView al contenedor
                         generatorView.getPreguntasContainer().add(preguntaView);

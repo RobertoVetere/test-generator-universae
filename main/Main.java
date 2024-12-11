@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import services.SimuladorService;
 import utils.Utils;
 
@@ -38,6 +39,11 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         Utils.setMainFrame(this);
         setGlobalFont();
         GeneratorView p1 = new GeneratorView();

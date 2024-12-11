@@ -4,6 +4,7 @@
  */
 package views;
 
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -30,223 +31,211 @@ public class PreguntaView extends javax.swing.JPanel {
 
         addPregunta = new javax.swing.JPanel();
         label3 = new java.awt.Label();
-        borrarPreguntaLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        preguntaLabel = new javax.swing.JTextArea();
         label1 = new java.awt.Label();
-        preguntaLabel = new javax.swing.JTextField();
-        correctaLabel = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        correctaLabel = new javax.swing.JTextArea();
         label2 = new java.awt.Label();
-        incorrectaLabel1 = new javax.swing.JTextField();
-        incorrectaLabel2 = new javax.swing.JTextField();
-        incorrectaLabel3 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        incorrectaLabel1 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        incorrectaLabel2 = new javax.swing.JTextArea();
+        borrarPreguntaLabel = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        incorrectaLabel3 = new javax.swing.JTextArea();
 
-        setBackground(new java.awt.Color(10, 38, 72));
+        setBackground(new java.awt.Color(37, 51, 66));
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        addPregunta.setBackground(new java.awt.Color(10, 38, 72));
+        addPregunta.setBackground(new java.awt.Color(77, 117, 165));
         addPregunta.setMinimumSize(new java.awt.Dimension(95, 0));
         addPregunta.setPreferredSize(new java.awt.Dimension(95, 100));
-        addPregunta.setLayout(new java.awt.GridLayout());
+        addPregunta.setLayout(new java.awt.GridLayout(1, 0));
 
+        label3.setBackground(new java.awt.Color(37, 51, 66));
         label3.setForeground(new java.awt.Color(255, 255, 255));
         label3.setMinimumSize(new java.awt.Dimension(20, 20));
-        label3.setPreferredSize(new java.awt.Dimension(20, 20));
         label3.setText("Pregunta");
         addPregunta.add(label3);
 
-        borrarPreguntaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        borrarPreguntaLabel.setMaximumSize(new java.awt.Dimension(15, 15));
-        borrarPreguntaLabel.setMinimumSize(new java.awt.Dimension(15, 15));
-        borrarPreguntaLabel.setName(""); // NOI18N
-        borrarPreguntaLabel.setPreferredSize(new java.awt.Dimension(15, 15));
-        addPregunta.add(borrarPreguntaLabel);
+        jScrollPane2.setBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        preguntaLabel.setBackground(new java.awt.Color(71, 81, 92));
+        preguntaLabel.setColumns(20);
+        preguntaLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        preguntaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        preguntaLabel.setRows(5);
+        preguntaLabel.setText("PreguntaEjemplo");
+        preguntaLabel.setBorder(null);
+        jScrollPane2.setViewportView(preguntaLabel);
 
         label1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         label1.setForeground(new java.awt.Color(255, 255, 255));
         label1.setText("Respuesta correcta");
 
-        preguntaLabel.setBackground(new java.awt.Color(124, 127, 143));
-        preguntaLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        preguntaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        preguntaLabel.setText("  Ejemplo");
-        preguntaLabel.setBorder(null);
-        preguntaLabel.setOpaque(true);
-        preguntaLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                preguntaLabelActionPerformed(evt);
-            }
-        });
-
-        correctaLabel.setBackground(new java.awt.Color(124, 127, 143));
-        correctaLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        correctaLabel.setBackground(new java.awt.Color(71, 81, 92));
+        correctaLabel.setColumns(20);
+        correctaLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         correctaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        correctaLabel.setText("  Ejemplo correcta");
+        correctaLabel.setRows(5);
+        correctaLabel.setText("CorrectaLabel");
         correctaLabel.setBorder(null);
-        correctaLabel.setOpaque(true);
-        correctaLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correctaLabelActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(correctaLabel);
 
         label2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         label2.setForeground(new java.awt.Color(255, 255, 255));
         label2.setText("Respuestas incorrectas");
 
-        incorrectaLabel1.setBackground(new java.awt.Color(124, 127, 143));
-        incorrectaLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        incorrectaLabel1.setBackground(new java.awt.Color(71, 81, 92));
+        incorrectaLabel1.setColumns(20);
+        incorrectaLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         incorrectaLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        incorrectaLabel1.setText("  Ejemplo incorrecta 1");
+        incorrectaLabel1.setRows(5);
+        incorrectaLabel1.setText("InorrectaLabel1");
         incorrectaLabel1.setBorder(null);
-        incorrectaLabel1.setOpaque(true);
-        incorrectaLabel1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                incorrectaLabel1ActionPerformed(evt);
-            }
-        });
+        jScrollPane3.setViewportView(incorrectaLabel1);
 
-        incorrectaLabel2.setBackground(new java.awt.Color(124, 127, 143));
-        incorrectaLabel2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        incorrectaLabel2.setBackground(new java.awt.Color(71, 81, 92));
+        incorrectaLabel2.setColumns(20);
+        incorrectaLabel2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         incorrectaLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        incorrectaLabel2.setText("  Ejemplo incorrecta 2");
+        incorrectaLabel2.setRows(5);
+        incorrectaLabel2.setText("InorrectaLabel1");
         incorrectaLabel2.setBorder(null);
-        incorrectaLabel2.setOpaque(true);
-        incorrectaLabel2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                incorrectaLabel2ActionPerformed(evt);
-            }
-        });
+        jScrollPane4.setViewportView(incorrectaLabel2);
 
-        incorrectaLabel3.setBackground(new java.awt.Color(124, 127, 143));
-        incorrectaLabel3.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        borrarPreguntaLabel.setBackground(new java.awt.Color(37, 51, 66));
+        borrarPreguntaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        borrarPreguntaLabel.setMaximumSize(new java.awt.Dimension(15, 15));
+        borrarPreguntaLabel.setMinimumSize(new java.awt.Dimension(15, 15));
+        borrarPreguntaLabel.setName(""); // NOI18N
+        borrarPreguntaLabel.setPreferredSize(new java.awt.Dimension(15, 15));
+
+        incorrectaLabel3.setBackground(new java.awt.Color(71, 81, 92));
+        incorrectaLabel3.setColumns(20);
+        incorrectaLabel3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         incorrectaLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        incorrectaLabel3.setText("  Ejemplo incorrecta 3");
+        incorrectaLabel3.setRows(5);
+        incorrectaLabel3.setText("InorrectaLabel1");
         incorrectaLabel3.setBorder(null);
-        incorrectaLabel3.setOpaque(true);
-        incorrectaLabel3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                incorrectaLabel3ActionPerformed(evt);
-            }
-        });
+        jScrollPane5.setViewportView(incorrectaLabel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(correctaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(preguntaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(incorrectaLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                    .addComponent(incorrectaLabel2)
-                    .addComponent(incorrectaLabel3)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(borrarPreguntaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane5)))
                 .addGap(22, 22, 22))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(23, Short.MAX_VALUE)
+                    .addContainerGap(19, Short.MAX_VALUE)
                     .addComponent(addPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(241, 241, 241)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(preguntaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(borrarPreguntaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correctaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(incorrectaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(incorrectaLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(incorrectaLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(14, 14, 14)
                     .addComponent(addPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(259, Short.MAX_VALUE)))
+                    .addContainerGap(264, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void preguntaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preguntaLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_preguntaLabelActionPerformed
-
-    private void correctaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correctaLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correctaLabelActionPerformed
-
-    private void incorrectaLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incorrectaLabel1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_incorrectaLabel1ActionPerformed
-
-    private void incorrectaLabel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incorrectaLabel2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_incorrectaLabel2ActionPerformed
-
-    private void incorrectaLabel3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incorrectaLabel3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_incorrectaLabel3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPregunta;
     private javax.swing.JLabel borrarPreguntaLabel;
-    private javax.swing.JTextField correctaLabel;
-    private javax.swing.JTextField incorrectaLabel1;
-    private javax.swing.JTextField incorrectaLabel2;
-    private javax.swing.JTextField incorrectaLabel3;
+    private javax.swing.JTextArea correctaLabel;
+    private javax.swing.JTextArea incorrectaLabel1;
+    private javax.swing.JTextArea incorrectaLabel2;
+    private javax.swing.JTextArea incorrectaLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
-    private javax.swing.JTextField preguntaLabel;
+    private javax.swing.JTextArea preguntaLabel;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getCorrectaLabel() {
+    public JTextArea getCorrectaLabel() {
         return correctaLabel;
     }
 
-    public void setCorrectaLabel(JTextField correctaLabel) {
+    public void setCorrectaLabel(JTextArea correctaLabel) {
         this.correctaLabel = correctaLabel;
     }
 
-    public JTextField getIncorrectaLabel1() {
+    public JTextArea getIncorrectaLabel1() {
         return incorrectaLabel1;
     }
 
-    public void setIncorrectaLabel1(JTextField incorrectaLabel1) {
+    public void setIncorrectaLabel1(JTextArea incorrectaLabel1) {
         this.incorrectaLabel1 = incorrectaLabel1;
     }
 
-    public JTextField getIncorrectaLabel2() {
+    public JTextArea getIncorrectaLabel2() {
         return incorrectaLabel2;
     }
 
-    public void setIncorrectaLabel2(JTextField incorrectaLabel2) {
+    public void setIncorrectaLabel2(JTextArea incorrectaLabel2) {
         this.incorrectaLabel2 = incorrectaLabel2;
     }
 
-    public JTextField getIncorrectaLabel3() {
+    public JTextArea getIncorrectaLabel3() {
         return incorrectaLabel3;
     }
 
-    public void setIncorrectaLabel3(JTextField incorrectaLabel3) {
+    
+    public JTextArea getPreguntaLabel() {
+        return preguntaLabel;
+    }
+    
+    
+
+    public void setIncorrectaLabel3(JTextArea incorrectaLabel3) {
         this.incorrectaLabel3 = incorrectaLabel3;
     }
 
-    public JTextField getPreguntaLabel() {
-        return preguntaLabel;
-    }
-
-    public void setPreguntaLabel(JTextField preguntaLabel) {
+    public void setPreguntaLabel(JTextArea preguntaLabel) {
         this.preguntaLabel = preguntaLabel;
     }
 
     
+
 }
